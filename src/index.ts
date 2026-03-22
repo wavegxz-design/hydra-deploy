@@ -1,9 +1,9 @@
 /**
  * ╔══════════════════════════════════════════════════════════════╗
- * ║   HYDRA DEPLOY SYSTEM v5.0                                  ║
- * ║   Author  : krypthane | wavegxz-design                     ║
- * ║   GitHub  : github.com/wavegxz-design                      ║
- * ║   License : MIT                                             ║
+ * ║   HYDRA DEPLOY SYSTEM v5.0.1                                 ║
+ * ║   Author  : krypthane | wavegxz-design                       ║
+ * ║   GitHub  : github.com/wavegxz-design                        ║
+ * ║   License : MIT                                              ║
  * ╚══════════════════════════════════════════════════════════════╝
  */
 
@@ -514,17 +514,17 @@ async function runDiagnostics(root: string): Promise<DiagResult[]> {
   };
 
   await check('Git available', async () => {
-    const { stdout } = await execAsync('git --version');
+    const { stdout } = await execAsync('git --version', { timeout: 8000 });
     return stdout.trim();
   });
 
   await check('Node version', async () => {
-    const { stdout } = await execAsync('node --version');
+    const { stdout } = await execAsync('node --version', { timeout: 8000 });
     return stdout.trim();
   });
 
   await check('npm version', async () => {
-    const { stdout } = await execAsync('npm --version');
+    const { stdout } = await execAsync('npm --version', { timeout: 8000 });
     return stdout.trim();
   });
 
@@ -540,7 +540,7 @@ async function runDiagnostics(root: string): Promise<DiagResult[]> {
   });
 
   await check('Git repository initialized', async () => {
-    const { stdout } = await execAsync('git rev-parse --git-dir', { cwd: root });
+    const { stdout } = await execAsync('git rev-parse --git-dir', { cwd: root, timeout: 8000 });
     return stdout.trim();
   });
 
