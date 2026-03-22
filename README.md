@@ -1,335 +1,250 @@
+[hydra-README.md](https://github.com/user-attachments/files/26169865/hydra-README.md)
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6366f1,50:8b5cf6,100:06b6d4&height=220&section=header&text=HYDRA&fontSize=90&fontColor=ffffff&fontAlignY=38&desc=Deploy%20System%20v5.0&descAlignY=60&descColor=a5b4fc&animation=fadeIn" width="100%"/>
+# 🐉 hydra-deploy
 
-<br>
+![Version](https://img.shields.io/badge/version-5.0.1-blueviolet?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-00ff41?style=flat-square)
+![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen?style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.3-informational?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macOS%20%7C%20windows-lightgrey?style=flat-square)
 
-[![Version](https://img.shields.io/badge/version-5.0.0-6366f1?style=for-the-badge&labelColor=0d1117)](https://github.com/wavegxz-design/hydra-deploy/releases)
-[![License](https://img.shields.io/badge/license-MIT-8b5cf6?style=for-the-badge&labelColor=0d1117)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-06b6d4?style=for-the-badge&logo=typescript&logoColor=white&labelColor=0d1117)](https://typescriptlang.org)
-[![Node](https://img.shields.io/badge/Node-18+-10b981?style=for-the-badge&logo=nodedotjs&logoColor=white&labelColor=0d1117)](https://nodejs.org)
-[![PRs](https://img.shields.io/badge/PRs-welcome-f97316?style=for-the-badge&labelColor=0d1117)](CONTRIBUTING.md)
-[![Contributors](https://img.shields.io/badge/contributors-30+-ec4899?style=for-the-badge&labelColor=0d1117)](https://github.com/wavegxz-design/hydra-deploy/graphs/contributors)
-
-<br>
-
-> **Multi-platform deployment CLI with auto-detection, self-healing error recovery,**
-> **social network management and professional README generation.**
-
-<br>
-
-[**Overview**](#-overview) · [**Features**](#-features) · [**Quick Start**](#-quick-start) · [**Platforms**](#-supported-platforms) · [**Architecture**](#-architecture) · [**Contributing**](#-contributing) · [**Author**](#-author)
-
-<br>
+> **Multi-platform deployment CLI** — detects your project type and deploys it to the right platform automatically. Built for developers who hate repeating the same deploy commands.
 
 </div>
 
 ---
 
-## 🐉 Overview
+## ¿Qué hace hydra-deploy?
 
-**Hydra** is a professional deployment CLI built for developers who need a reliable, self-healing, multi-platform release pipeline — without the complexity of enterprise CI/CD tools.
+`hydra-deploy` es una herramienta CLI que **automatiza el deployment** de proyectos. La ejecutas en la carpeta de tu proyecto y ella:
 
-It detects your project stack automatically, manages deployments across 6+ platforms with retry logic, handles errors with registered recovery strategies, and generates production-ready documentation — all from a single interactive terminal interface.
-
-```
-One command. Any stack. Any platform.
-```
-
-<br>
+1. **Detecta automáticamente** qué tipo de proyecto es (Next.js, React, Python, Docker, etc.)
+2. **Muestra las plataformas disponibles** para ese stack (Vercel, Netlify, Cloudflare Workers, GitHub Pages, etc.)
+3. **Ejecuta el deploy** con los comandos correctos para cada plataforma
+4. **Reintenta automáticamente** si algo falla (hasta 3 intentos configurables)
+5. **Genera el README** de tu proyecto con badges, estructura y tabla de plataformas
 
 ---
 
-## ✨ Features
-
-<table>
-<thead>
-<tr>
-<th align="center">Module</th>
-<th align="center">Feature</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">🤖</td>
-<td align="center"><strong>Auto-Detect</strong></td>
-<td>Scans your project and identifies tech stack (Next.js, React, Vue, Python, Go, Rust, Docker…)</td>
-</tr>
-<tr>
-<td align="center">🚀</td>
-<td align="center"><strong>Multi-Deploy</strong></td>
-<td>Deploys to Vercel, Netlify, Cloudflare Workers, GitHub Pages, Docker Hub, PythonAnywhere</td>
-</tr>
-<tr>
-<td align="center">🛡️</td>
-<td align="center"><strong>AUTOFIX</strong></td>
-<td>4-step recovery chain: retry → clean artifacts → rotate credentials → fallback platform</td>
-</tr>
-<tr>
-<td align="center">📊</td>
-<td align="center"><strong>Dashboard</strong></td>
-<td>Interactive terminal UI with real-time deploy status, logs and diagnostics</td>
-</tr>
-<tr>
-<td align="center">📝</td>
-<td align="center"><strong>README Gen</strong></td>
-<td>Generates professional README with badges, contact info, structure and contributing guide</td>
-</tr>
-<tr>
-<td align="center">🌐</td>
-<td align="center"><strong>Social Manager</strong></td>
-<td>Manages 10 social network profiles from a single config</td>
-</tr>
-<tr>
-<td align="center">📋</td>
-<td align="center"><strong>Structured Logger</strong></td>
-<td>Leveled logging with bounded buffer — no memory leaks, full error history</td>
-</tr>
-</tbody>
-</table>
-
-<br>
-
----
-
-## ⚡ Quick Start
+## Instalación
 
 ```bash
-# Clone
+# Clonar
 git clone https://github.com/wavegxz-design/hydra-deploy.git
 cd hydra-deploy
 
-# Install
+# Instalar dependencias
 npm install
 
-# Configure — add your platform tokens
-cp .env.example .env
+# Ejecutar directamente (desarrollo)
+npm run dev
 
-# Run
-npm run hydra
-# or: npx ts-node src/index.ts /path/to/your/project
+# O compilar y usar como comando global
+npm run build
+npm link           # después: hydra (desde cualquier carpeta)
 ```
 
-<br>
+**Requisitos:** Node.js 18+ · npm 9+
 
 ---
 
-## 🚀 Supported Platforms
+## Uso
 
-<table>
-<thead>
-<tr>
-<th align="center">Platform</th>
-<th align="center">Type</th>
-<th align="center">Auto-Detect</th>
-<th>Env Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">⚡ <strong>Cloudflare Workers</strong></td>
-<td align="center">Web / Edge</td>
-<td align="center">✅</td>
-<td><code>CLOUDFLARE_API_TOKEN</code></td>
-</tr>
-<tr>
-<td align="center">▲ <strong>Vercel</strong></td>
-<td align="center">Web</td>
-<td align="center">✅ Next.js</td>
-<td><code>VERCEL_TOKEN</code></td>
-</tr>
-<tr>
-<td align="center">🌍 <strong>Netlify</strong></td>
-<td align="center">Web</td>
-<td align="center">✅ React/Vue</td>
-<td><code>NETLIFY_AUTH_TOKEN</code></td>
-</tr>
-<tr>
-<td align="center">🐙 <strong>GitHub Pages</strong></td>
-<td align="center">Static</td>
-<td align="center">✅ Always</td>
-<td><code>GITHUB_TOKEN</code></td>
-</tr>
-<tr>
-<td align="center">🐳 <strong>Docker Hub</strong></td>
-<td align="center">Container</td>
-<td align="center">✅ Dockerfile</td>
-<td><code>DOCKER_USERNAME</code> <code>DOCKER_PASSWORD</code></td>
-</tr>
-<tr>
-<td align="center">🐍 <strong>PythonAnywhere</strong></td>
-<td align="center">API</td>
-<td align="center">✅ Python</td>
-<td><code>PA_API_KEY</code></td>
-</tr>
-</tbody>
-</table>
+```bash
+# En la carpeta de tu proyecto:
+cd ~/mi-proyecto
+npx ts-node /ruta/a/hydra-deploy/src/index.ts
 
-<br>
+# O si lo instalaste globalmente:
+hydra
+
+# Con carpeta específica:
+hydra /ruta/a/mi-proyecto
+```
+
+### Menú interactivo
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  🚀 Deploy           → despliega a la plataforma elegida     │
+│  📝 Generate README  → crea README.md con badges y docs      │
+│  🌐 Social Networks  → configura tus redes sociales          │
+│  🔍 Diagnostics      → verifica git, node, network, etc.     │
+│  📋 View Logs        → muestra errores y warnings            │
+│  👥 Contributing     → info para contribuidores              │
+│  ✕  Exit                                                     │
+└──────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## 🛡️ AUTOFIX Recovery Chain
+## Plataformas soportadas
 
-When a deployment fails, Hydra doesn't crash — it runs a structured recovery sequence:
+| Plataforma | Stack detectado | Env var requerida |
+|------------|----------------|-------------------|
+| **Vercel** | Next.js | `VERCEL_TOKEN` |
+| **Netlify** | React (sin Next) | `NETLIFY_AUTH_TOKEN` |
+| **GitHub Pages** | Cualquiera | `GITHUB_TOKEN` |
+| **Cloudflare Workers** | Cualquiera | `CLOUDFLARE_API_TOKEN` |
+| **Docker Hub** | Docker | `DOCKER_USERNAME` + `DOCKER_PASSWORD` |
+| **PythonAnywhere** | Python | `PA_API_KEY` |
 
+### Configurar env vars
+
+```bash
+# Temporal (sesión actual)
+export CLOUDFLARE_API_TOKEN="tu-token-aqui"
+export GITHUB_TOKEN="ghp_tu-token"
+
+# Permanente — agregar a ~/.bashrc o ~/.zshrc
+echo 'export CLOUDFLARE_API_TOKEN="tu-token"' >> ~/.zshrc
+source ~/.zshrc
+
+# O crear archivo .env en tu proyecto
+echo "CLOUDFLARE_API_TOKEN=tu-token" > .env
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                  HYDRA RECOVERY CHAIN                       │
-├──────┬──────────────────────────────────────────────────────┤
-│  01  │  Retry with exponential backoff (configurable)       │
-│  02  │  Clean build artifacts and rebuild from scratch      │
-│  03  │  Check and restore missing env vars from cache       │
-│  04  │  Skip platform and continue with remaining targets   │
-└──────┴──────────────────────────────────────────────────────┘
-```
 
-Every failure is timestamped and logged. Nothing is swallowed silently.
-
-<br>
+Si una env var no está configurada, hydra **omite esa plataforma** con un warning — no crashea.
 
 ---
 
-## 🏗️ Architecture
+## Detección de proyectos
+
+hydra detecta el stack leyendo archivos reales del proyecto:
 
 ```
-hydra-deploy/
-│
-├── src/
-│   └── index.ts              ← Single-file architecture
-│                               ├── Logger         (bounded buffer, leveled)
-│                               ├── HydraError     (typed, recoverable flag)
-│                               ├── RecoveryRegistry (explicit strategies)
-│                               ├── detectProject  (reads real files)
-│                               ├── deployPlatform (real exec + retry)
-│                               ├── generateReadme (clean Markdown)
-│                               ├── runDiagnostics (system checks)
-│                               └── main()         (interactive loop)
-│
-├── hydra.config.json         ← Project + author config (auto-generated)
-├── tsconfig.json             ← TypeScript strict config
-├── package.json
-├── .env                      ← Platform API tokens (git-ignored)
-├── CONTRIBUTING.md
-└── README.md
+package.json con "next"    → Next.js  → Vercel
+package.json con "react"   → React    → Netlify
+requirements.txt           → Python   → PythonAnywhere
+Dockerfile                 → Docker   → Docker Hub
+go.mod                     → Go
+Cargo.toml                 → Rust
+composer.json              → PHP
 ```
 
-<br>
+Si no detecta nada, asume **Static** y ofrece GitHub Pages + Cloudflare Workers.
 
 ---
 
-## ⚙️ Configuration
+## Configuración persistente
 
-`hydra.config.json` is auto-generated on first run:
+hydra guarda su configuración en `hydra.config.json` en la carpeta del proyecto:
 
 ```json
 {
   "version": "5.0.0",
-  "author": {
-    "name"    : "krypthane",
-    "github"  : "github.com/wavegxz-design",
-    "telegram": "t.me/Skrylakk",
-    "email"   : "Workernova@proton.me",
-    "site"    : "krypthane.workernova.workers.dev"
-  },
   "errorHandling": {
     "retryAttempts": 3,
-    "retryDelay"   : 2000,
-    "autoRecovery" : true
+    "retryDelay": 2000,
+    "autoRecovery": true
   },
-  "socialNetworks": []
+  "socialNetworks": [
+    { "name": "GitHub",   "url": "https://github.com/wavegxz-design", "enabled": true },
+    { "name": "Telegram", "url": "https://t.me/Skrylakk",             "enabled": true }
+  ]
 }
 ```
 
-<br>
-
 ---
 
-## 🛣️ Roadmap
-
-**v5.1**
-- [ ] Railway · Fly.io · Render adapter modules
-- [ ] Real Cloudflare Workers API integration via `wrangler`
-- [ ] Slack / Telegram notification on deploy complete
-
-**v6.0**
-- [ ] Plugin system — drop `.ts` files into `plugins/`
-- [ ] Web dashboard (local UI served on `localhost:4000`)
-- [ ] Multi-project batch deployments
-- [ ] Deploy history with rollback
-
-> 💡 Suggest a feature → [open an issue](https://github.com/wavegxz-design/hydra-deploy/issues/new)
-
-<br>
-
----
-
-## 🤝 Contributing
-
-Hydra is designed for **30+ open source contributors**.
+## Diagnósticos
 
 ```bash
-# Fork → clone → branch
-git checkout -b feat/your-feature
-
-# Conventional commit format
-git commit -m "feat: add Railway deploy adapter"
-
-# Push → PR
-git push origin feat/your-feature
+# Desde el menú → "🔍 Diagnostics"
+# Verifica automáticamente:
+✓ git --version
+✓ node --version
+✓ npm --version
+✓ Directorio del proyecto writable
+✓ package.json existe
+✓ Git repo inicializado
+✓ GitHub API reachable (network check)
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines on error handling patterns, TypeScript conventions and PR requirements.
+---
 
-<br>
+## README Generator
+
+La opción **📝 Generate README** crea un `README.md` profesional con:
+- Badges de versión, licencia, stack
+- Overview del proyecto
+- Tabla de plataformas de deploy
+- Quick start commands
+- Estructura de carpetas
+- Sección de contribución con instrucciones de PR
+- Tabla de contacto del autor
 
 ---
 
-## 🔗 Related Projects
+## Estructura del proyecto
 
-<table>
-<tr>
-<td>
-<a href="https://github.com/wavegxz-design/NEXORA-TOOLKIT"><strong>NEXORA-TOOLKIT</strong></a>
-<br><br>Advanced modular ADB toolkit for Android device management. Multi-distro installer, WiFi ADB, data extraction, diagnostics.
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/wavegxz-design/recon-kit"><strong>recon-kit</strong></a>
-<br><br>Senior-level modular reconnaissance toolkit. Distro auto-detection, AUTOFIX engine, 6 recon modules, plugin system.
-</td>
-</tr>
-</table>
-
-<br>
+```
+hydra-deploy/
+├── src/
+│   └── index.ts       # CLI principal — toda la lógica
+├── dist/              # TypeScript compilado (generado por npm run build)
+├── hydra.config.json  # Configuración local (generado en primer uso)
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
 ---
 
-## ⚖️ Legal
+## Scripts disponibles
 
-Distributed under the MIT License. Use responsibly.
+```bash
+npm run dev     # Ejecutar sin compilar (ts-node)
+npm run build   # Compilar TypeScript → dist/
+npm run start   # Ejecutar compilado
+npm run hydra   # Alias de dev
+npm run lint    # ESLint en src/
+npm run format  # Prettier en src/
+npm run test    # Tests (passWithNoTests por ahora)
+```
 
-<br>
+---
+
+## Contribuir
+
+```bash
+git clone https://github.com/wavegxz-design/hydra-deploy.git
+cd hydra-deploy
+npm install
+git checkout -b feat/tu-feature
+# ... cambios ...
+git commit -m "feat: descripción"
+git push origin feat/tu-feature
+# → Abrir Pull Request
+```
+
+Áreas abiertas para contribución:
+- Adapter para Fly.io, Railway, Render
+- Integración con APIs de redes sociales
+- Tests unitarios
+- Soporte Windows mejorado
+- Cache de builds
+
+---
+
+## Autor
+
+| | |
+|-|-|
+| **GitHub** | [github.com/wavegxz-design](https://github.com/wavegxz-design) |
+| **Telegram** | [t.me/Skrylakk](https://t.me/Skrylakk) |
+| **Email** | Workernova@proton.me |
+| **Site** | [krypthane.workernova.workers.dev](https://krypthane.workernova.workers.dev) |
+
+---
+
+## Licencia
+
+MIT © [krypthane](https://github.com/wavegxz-design)
 
 ---
 
 <div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:6366f1,100:06b6d4&height=140&section=footer" width="100%"/>
-
-<br>
-
-**Built with focus by [krypthane](https://github.com/wavegxz-design)**
-
-[![Site](https://img.shields.io/badge/krypthane.workernova.workers.dev-6366f1?style=flat-square&logo=cloudflare&logoColor=white)](https://krypthane.workernova.workers.dev)
-[![Telegram](https://img.shields.io/badge/Telegram-6366f1?style=flat-square&logo=telegram&logoColor=white)](https://t.me/Skrylakk)
-[![Email](https://img.shields.io/badge/Proton_Mail-6366f1?style=flat-square&logo=protonmail&logoColor=white)](mailto:Workernova@proton.me)
-[![GitHub](https://img.shields.io/badge/wavegxz--design-6366f1?style=flat-square&logo=github&logoColor=white)](https://github.com/wavegxz-design)
-
-<br>
-
-<sub>⭐ Drop a star if Hydra saved you time</sub>
-
+<sub>🐉 Built by krypthane · wavegxz-design · Open Source · Security First</sub>
 </div>
